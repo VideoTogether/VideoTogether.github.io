@@ -15,7 +15,6 @@
 
     <link rel="stylesheet" type="text/css" href="assets/win95.css">
 
-
 </head>
 
 <body class="windows-scrollbar">
@@ -77,11 +76,10 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-unstyled mt-3 mb-4">
+                            <li id="message1" style="display: none;">和朋友分享下面的链接，一起开始观看视频吧</li>
+                            <li id="message2" style="display: none;">还没有朋友？在新窗口打开也可以呀</li>
                             <a target="_blank" id="urlToShare"></li>
-                            <li>Alex's page</li>
-                            <li>Cloud background</li>
-                            <li>Winamp</li>
-                            <li>It is very cool</li>
+                            <li id="message3" style="display: none;">正在同步朋友的播放进度</li>
                         </ul>
                         <a href="personal_page.html" class="btn btn-lg btn-block"><img
                                 src="assets/icons/internet_connection_wiz-5.png" class="icon-16"> Okay, go</a>
@@ -117,6 +115,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/maggch97/VideoTogether@latest/release/extension.user.js">
+    </script>
     <script type="text/javascript">
         (function () {
             function makeid(length) {
@@ -132,6 +132,7 @@
             let timer = setInterval(() => {
                 let url = new URL(window.location);
                 if (url.searchParams.get("VideoTogetherRoomName") != undefined) {
+                    document.querySelector("#message3").style = undefined;
                     clearInterval(timer);
                     return;
                 }
@@ -147,6 +148,8 @@
                     urlToShare.searchParams.set("videoTogetherTimestamp","3000000000");
                     document.querySelector("#urlToShare").innerHTML = urlToShare;
                     document.querySelector("#urlToShare").href = urlToShare;
+                    document.querySelector("#message1").style = undefined;
+                    document.querySelector("#message2").style = undefined;
                     clearInterval(timer);
                 }
             }, 500)
