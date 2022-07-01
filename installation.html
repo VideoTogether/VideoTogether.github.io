@@ -195,7 +195,7 @@
             let url = "https://cdn.jsdelivr.net/gh/maggch97/VideoTogether@latest/release/extension.user.js?timestamp=" + Date.now();
             let script = "";
             let r = await fetch(url);
-            return await r.text;
+            return await r.text();
         }
     </script>
 </body>
