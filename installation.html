@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>VideoTogether</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+    <meta author="Alex B" />
+    <meta property="og:image" content="assets/preview.png" />
+
+    <link rel="shortcut icon" href="assets/icons/computer-3.png" type="image/png">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="assets/win95.css">
+
+</head>
+
+<body class="windows-scrollbar">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-95 ">
+        <a class="navbar-brand" href="#">
+            <img width="32" src="assets/vt.png"> VideoTogether</a>
+        <div class="navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">主页<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/installation.html">安装</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/usage.html">使用</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        其他
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="./local.html">观看本地视频</a>
+                        <a class="dropdown-item" href="https://github.com/maggch97/VideoTogether">插件源码</a>
+                        <a class="dropdown-item"
+                            href="https://github.com/VideoTogether/VideoTogether.github.io">主页源码</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">VideoTogether 一起看视频</h1>
+        <p class="lead">和你的家人朋友一起在线看视频，无论相隔多远</p>
+    </div>
+
+    <!-- Not header -->
+
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-12 my-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">安装说明</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>安装插件后才能同步其他平台的视频</li>
+                            <li>选择你的操作系统：</li>
+                        </ul>
+                        <div class="col-sm-10">
+                            <div class="form-check" onclick="ShowPcInstallation()">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
+                                    value="option1" checked="">
+                                <label class="form-check-label" for="gridRadios1">
+                                    Windows （电脑）
+                                </label>
+                            </div>
+                            <div class="form-check" onclick="ShowPcInstallation()">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
+                                    value="option2">
+                                <label class="form-check-label" for="gridRadios2">
+                                    macOS （苹果电脑）
+                                </label>
+                            </div>
+                            <div class="form-check" onclick="ShowMobileInstallation()">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3"
+                                    value="option3">
+                                <label class="form-check-label" for="gridRadios3">
+                                    Android （安卓手机，安卓平板，华为手机平板...）
+                                </label>
+                            </div>
+                            <div class="form-check" onclick="ShowMobileInstallation()">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4"
+                                    value="option4">
+                                <label class="form-check-label" for="gridRadios4">
+                                    IOS，iPad OS （苹果手机，苹果平板）
+                                </label>
+                            </div>
+                        </div>
+                        <a style="margin: 16px 0px 16px 0px;" href="/usage.html" class="btn btn-lg btn-block"><img
+                                src="assets/icons/internet_connection_wiz-5.png" class="icon-16">已经安装，查看使用说明</a>
+                        <div style="display: none;" id="pcInstallation">
+                            <p>Windows 和 macOS 用户推荐使用微软 Edge 浏览器</p>
+                            <p>
+                                1. 使用 Edge 浏览器访问
+                                <a target="_blank"
+                                    href="https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd">Tampermonkey
+                                    插件安装链接</a>
+                                安装 Tampermonkey 插件
+                            </p>
+                            <p>
+                                2. 使用 Edge 浏览器访问
+                                <a target="_blank"
+                                    href="https://cdn.jsdelivr.net/gh/maggch97/VideoTogether@latest/release/extension.user.js">VideoTogether
+                                    插件安装链接</a>
+                                ，点击 安装 按钮即可安装 VideoTogether 插件
+                            </p>
+                        </div>
+                        <div id="mobileInstallation" style="display: none;">
+                            <p>安卓苹果用户推荐使用 Alook 浏览器</p>
+                            <p><a target="_blank" href="https://apps.apple.com/app/id1261944766">苹果下载</a></p>
+                            <p><a target="_blank" href="https://coolapk.com/apk/alook.browser">安卓下载</a></p>
+                            <p>使用 Alook 浏览器打开本页，点击安装按钮即可安装</p>
+                            <button class="btn btn-primary" onclick="install()">安装 VideoTogether</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="taskbar">
+        <div class="row" style="margin-right: 0px;">
+            <div class="col-4">
+                <a href="https://github.com/maggch97/VideoTogether" class="btn start-button"><img
+                        src="assets/icons/directory_folder_options-5.png" class="icon-16"> GitHub</a>
+            </div>
+            <div class="col-8 time">如果觉得插件好用，欢迎分享给你的朋友们</div>
+        </div>
+
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script>
+        function ShowMobileInstallation() {
+            document.querySelector("#mobileInstallation").style = "";
+            document.querySelector("#pcInstallation").style = "display: None;";
+        }
+        function ShowPcInstallation() {
+            document.querySelector("#mobileInstallation").style = "display: None;";
+            document.querySelector("#pcInstallation").style = "";
+        }
+        ShowPcInstallation();
+        function install() {
+            if (typeof (window.via) == "undefined" || typeof (window.via.addon) == "undefined") {
+                alert("不是 Via 或 Alook 浏览器");
+            } else {
+                window.via.addon(encode());
+            }
+        }
+
+        function encode() {
+            var plugin = {
+                author: "maggch@outlook.com",
+                code: Base64.encode(getScript()),
+                id: 1656139986,
+                name: "Video Together",
+                url: "*"
+            }
+            return Base64.encode(JSON.stringify(plugin));
+        }
+
+        function getScript() {
+            var url = "https://cdn.jsdelivr.net/gh/maggch97/VideoTogether@latest/release/extension.user.js?timestamp=" + Date.now();
+            var script = "";
+            $.ajax({
+                url: url,
+                method: "get",
+                async: false,
+                success: function (res) {
+                    script = res;
+                }
+            });
+            return script;
+        }
+    </script>
+</body>
+
+</html>
