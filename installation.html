@@ -168,16 +168,20 @@
             document.querySelector("#pcInstallation").style = "";
         }
         ShowPcInstallation();
-        function install() {
+        async function install() {
             if (typeof (window.via) == "undefined" || typeof (window.via.addon) == "undefined") {
                 alert("不是 Via 或 Alook 浏览器");
             } else {
-                window.via.addon(encode());
+                try {
+                    window.via.addon(await encode());
+                } catch (e) {
+                    alert("安装失败" + e);
+                }
             }
         }
 
-        function encode() {
-            var plugin = {
+        async function encode() {
+            let plugin = {
                 author: "maggch@outlook.com",
                 code: Base64.encode(getScript()),
                 id: 1656139986,
@@ -187,18 +191,11 @@
             return Base64.encode(JSON.stringify(plugin));
         }
 
-        function getScript() {
-            var url = "https://cdn.jsdelivr.net/gh/maggch97/VideoTogether@latest/release/extension.user.js?timestamp=" + Date.now();
-            var script = "";
-            $.ajax({
-                url: url,
-                method: "get",
-                async: false,
-                success: function (res) {
-                    script = res;
-                }
-            });
-            return script;
+        async function getScript() {
+            let url = "https://cdn.jsdelivr.net/gh/maggch97/VideoTogether@latest/release/extension.user.js?timestamp=" + Date.now();
+            let script = "";
+            let r = await fetch(url);
+            return await r.text;
         }
     </script>
 </body>
