@@ -191,7 +191,7 @@
         async function encode() {
             let plugin = {
                 author: "maggch@outlook.com",
-                code: Base64.encode(getScript()),
+                code: Base64.encode(await getScript()),
                 id: 1656139986,
                 name: "Video Together",
                 url: "*"
@@ -203,7 +203,7 @@
             let url = "https://cdn.jsdelivr.net/gh/maggch97/VideoTogether@latest/release/extension.user.js?timestamp=" + Date.now();
             let script = "";
             let r = await fetch(url);
-            return await r.text;
+            return await r.text();
         }
     </script>
 </body>
