@@ -89,14 +89,14 @@
                                     macOS （苹果电脑）
                                 </label>
                             </div>
-                            <div class="form-check" onclick="ShowMobileInstallation()">
+                            <div class="form-check" onclick="ShowAndroidInstallation()">
                                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3"
                                     value="option3">
                                 <label class="form-check-label" for="gridRadios3">
                                     Android （安卓手机，安卓平板，华为手机平板...）
                                 </label>
                             </div>
-                            <div class="form-check" onclick="ShowMobileInstallation()">
+                            <div class="form-check" onclick="ShowIosInstallation()">
                                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4"
                                     value="option4">
                                 <label class="form-check-label" for="gridRadios4">
@@ -123,16 +123,29 @@
                                 ，点击 安装 按钮即可安装 VideoTogether 插件
                             </p>
                         </div>
-                        <div id="mobileInstallation" style="display: none;">
-                            <p>安卓苹果用户推荐使用 Alook 浏览器</p>
-                            <p><a target="_blank" href="https://apps.apple.com/app/id1261944766">苹果下载 Alook</a></p>
-                            <p><a target="_blank" href="https://coolapk.com/apk/alook.browser">安卓下载 Alook</a></p>
-                            <p>苹果平台 Alook 收费，使用免费的鲨鱼浏览器访问本页也可安装</p>
-                            <p><a target="_blank" href="https://apps.apple.com/app/id1271984698">苹果下载 鲨鱼浏览器</a></p>
-                            <p>请关闭 Alook 或鲨鱼浏览器的视频浮窗播放功能，否则插件无法正常工作</p>
-                            <p>使用 Alook 浏览器打开本页，点击安装按钮即可安装</p>
+                        <div id="iosInstallation" style="display: none;">
+                            <p>苹果用户推荐使用 鲨鱼浏览器</p>
+                            <p><a target="_blank" href="https://apps.apple.com/app/id1271984698">下载 鲨鱼浏览器</a></p>
+                            <p>请关闭鲨鱼浏览器的视频浮窗播放功能，否则插件无法正常工作</p>
+                            <p>使用鲨鱼浏览器打开本页，点击安装按钮即可安装</p>
                             <button class="btn btn-primary" onclick="install()">安装 VideoTogether</button>
-
+                        </div>
+                        <div id="androidInstallation" style="display: none;">
+                            <p>安卓用户有三种安装方式，如果你不知道选哪种那就选第一种。</p>
+                            <h5>1. 安装 Video Together APP</h5>
+                            <p>Video Together APP 自带插件，安装完即可使用</p>
+                            <p><a target="_blank" href="">下载 Video Together APP (正在开发中)</a></p>
+                            <p>对视频网站兼容性 100%</p>
+                            <br>
+                            <h5>2. 使用 Alook 浏览器安装插件</h5>
+                            <p><a target="_blank" href="https://coolapk.com/apk/alook.browser">安卓下载 Alook</a></p>
+                            <p> 使用 Alook 浏览器访问本页，点击安装按钮</p>
+                            <button class="btn btn-primary" onclick="install()">安装 VideoTogether</button>
+                            <p>Alook 安装的插件对一些盗版视频网站不兼容，如果遇到同步问题可以尝试 Video Together APP</p>
+                            <br>
+                            <h5>3. 使用 kiwi 浏览器</h5>
+                            <p>如果你能够访问谷歌浏览器的扩展商店，可以按照 Windows 的安装步骤安装。不详细展开</p>
+                            <p>对视频网站兼容性 100%，但是安装有门槛</p>
                         </div>
                     </div>
                 </div>
@@ -165,31 +178,51 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script>
-        function ShowMobileInstallation() {
-            document.querySelector("#mobileInstallation").style = "";
+        function HideAllInstallation(){
             document.querySelector("#pcInstallation").style = "display: None;";
+            document.querySelector("#iosInstallation").style = "display: None;";
+            document.querySelector("#androidInstallation").style = "display: None;";
+        }
+        function ShowAndroidInstallation(){
+            HideAllInstallation();
+            document.querySelector("#androidInstallation").style = "";
+        }
+        function ShowIosInstallation() {
+            HideAllInstallation();
+            document.querySelector("#iosInstallation").style = "";
         }
         function ShowPcInstallation() {
-            document.querySelector("#mobileInstallation").style = "display: None;";
+            HideAllInstallation();
             document.querySelector("#pcInstallation").style = "";
         }
         ShowPcInstallation();
         async function install() {
+            let isShark = false;
+            try {
+                if (window.webkit.messageHandlers.jsExtensionContent.postMessage != undefined) {
+                    isShark = true;
+                }
+            } catch { }
             if (typeof (window.via) != "undefined" && typeof (window.via.addon) != "undefined") {
                 try {
                     window.via.addon(await encode());
                 } catch (e) {
                     alert("安装失败" + e);
                 }
-            } else if (typeof (window.webkit.messageHandlers.jsExtensionContent.postMessage) != "undefined") {
-                let sharkDic = {
-                    'type': 'via',
-                    'source': await encode()
-                };
-                console.info(sharkDic);
-                window.webkit.messageHandlers.jsExtensionContent.postMessage(sharkDic);
+            } else if (isShark) {
+                try {
+                    let sharkDic = {
+                        'type': 'via',
+                        'source': await encode()
+                    };
+                    console.info(sharkDic);
+                    window.webkit.messageHandlers.jsExtensionContent.postMessage(sharkDic);
+                } catch (e) {
+                    alert("安装失败" + e);
+                }
+
             } else {
-                alert("不是 Via 或 Alook 浏览器");
+                alert("不是 Via， Alook 或鲨鱼浏览器");
             }
         }
 
