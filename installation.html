@@ -96,11 +96,18 @@
                                     Android （安卓手机，安卓平板，华为手机平板...）
                                 </label>
                             </div>
+                            <div class="form-check" onclick="ShowIos15Installation()">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4"
+                                    value="option4">
+                                <label class="form-check-label" for="gridRadios4">
+                                    IOS 15 及以上，iPad OS 15 及以上 （苹果手机，苹果平板）
+                                </label>
+                            </div>
                             <div class="form-check" onclick="ShowIosInstallation()">
                                 <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4"
                                     value="option4">
                                 <label class="form-check-label" for="gridRadios4">
-                                    IOS，iPad OS （苹果手机，苹果平板）
+                                    IOS 14 及以下，iPad OS 14 及以上 （苹果手机，苹果平板）
                                 </label>
                             </div>
                         </div>
@@ -124,30 +131,39 @@
                             </p>
                         </div>
                         <div id="iosInstallation" style="display: none;">
-                            <p>苹果用户推荐使用 鲨鱼浏览器</p>
+                            <p>IOS 14及以下的苹果用户推荐使用 鲨鱼浏览器</p>
                             <p><a target="_blank" href="https://apps.apple.com/app/id1271984698">下载 鲨鱼浏览器</a></p>
                             <p>请关闭鲨鱼浏览器的视频浮窗播放功能，否则插件无法正常工作</p>
                             <p>使用鲨鱼浏览器打开本页，点击安装按钮即可安装</p>
                             <button class="btn btn-primary" onclick="install()">安装 VideoTogether</button>
                         </div>
                         <div id="androidInstallation" style="display: none;">
-                            <p>安卓用户有三种安装方式，如果你不知道选哪种那就选第一种。</p>
-                            <h5>1. 使用 Alook 浏览器安装插件</h5>
-                            <p><a target="_blank" href="https://coolapk.com/apk/alook.browser">安卓下载 Alook</a></p>
-                            <p> 使用 Alook 浏览器访问本页，点击安装按钮</p>
-                           <p>  请关闭 Alook 浏览器的视频浮窗播放功能，否则插件无法正常工作</p>
-                            <button class="btn btn-primary" onclick="install()">安装 VideoTogether</button>
-                            <p>Alook 安装的插件对一些盗版视频网站不兼容，如果遇到同步问题可以尝试 Video Together APP</p>
-                            <br>
-                            <h5>2. 安装 Video Together APP</h5>
-                            <p>Video Together APP 自带插件，安装完即可使用</p>
-                            <p><a target="_blank" href="https://wwc.lanzouq.com/ixNmx07ilfyb">下载 Video Together APP 密码: 52ck</a></p>
-                            <p>只推荐在 Alook 浏览器无法同步你观看的视频时安装，请优先使用 Alook</p>
-                            <br>
-                            
-                            <h5>3. 使用 kiwi 浏览器</h5>
-                            <p>如果你能够访问谷歌浏览器的扩展商店，可以按照 Windows 的安装步骤安装。不详细展开</p>
-                            <p>对视频网站兼容性 100%，但是安装有门槛</p>
+                            <p>安卓推荐使用 猴狐浏览器</p>
+                            <a href="https://www.coolapk.com/apk/296754">下载 猴狐浏览器</a>
+                            <p>1. 请使用 猴狐浏览器 访问本页，点击 <a href="https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd">Tampermonkey 插件</a> 按下图安装 Tampermonkey </p>
+                            <a href="/assets/android_tm.png">
+                                <img width="100%" src="/assets/android_tm.png"/>
+                            </a>
+                            <p>
+                                2. 使用 猴狐浏览器 访问本页，点击
+                                <a target="_blank"
+                                    href="https://cdn.jsdelivr.net/gh/maggch97/VideoTogether@latest/release/extension.user.js">VideoTogether
+                                    插件安装链接</a>
+                                ，按下图安装
+                            </p>
+                            <a href="/assets/android_vt.jpg">
+                                <img width="100%" src="/assets/android_vt.jpg"/>
+                            </a>
+                        </div>
+                        <div  id="ios15Installation" style="display: none;">
+                            <p>IOS 15 及以上的苹果用户推荐使用 userscripts 插件，安装后可在 Safari 浏览器使用</p>
+                            <p>请参考下方视频操作</p>
+                            <p>1. <a href="https://apps.apple.com/app/userscripts/id1463298887">下载 userscripts 应用</a></p>
+                            <p>2. 启用 userscripts 插件后，点击
+                                <a href="https://cdn.jsdelivr.net/gh/maggch97/VideoTogether@latest/release/extension.user.js">Video Together 安装链接</a>
+                                进行安装
+                            </p>
+                            <video controls autoplay loop playsinline  width="100%" src="/assets/ios15.mp4"></video>
                         </div>
                     </div>
                 </div>
@@ -184,6 +200,7 @@
             document.querySelector("#pcInstallation").style = "display: None;";
             document.querySelector("#iosInstallation").style = "display: None;";
             document.querySelector("#androidInstallation").style = "display: None;";
+            document.querySelector("#ios15Installation").style = "display: None;";
         }
         function ShowAndroidInstallation(){
             HideAllInstallation();
@@ -192,6 +209,10 @@
         function ShowIosInstallation() {
             HideAllInstallation();
             document.querySelector("#iosInstallation").style = "";
+        }
+        function ShowIos15Installation() {
+            HideAllInstallation();
+            document.querySelector("#ios15Installation").style = "";
         }
         function ShowPcInstallation() {
             HideAllInstallation();
