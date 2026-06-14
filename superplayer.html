@@ -1,0 +1,22 @@
+<body>
+    <script>
+        window.addEventListener("message", async e => {
+            if (e.data.method == "fetch") {
+                try {
+                    const blob = await (await fetch(e.data.url)).blob();
+                    window.top.postMessage({
+                        method: "fetchResponse",
+                        blob: blob,
+                        url: e.data.url
+                    }, "*")
+                } catch (err) {
+                    window.top.postMessage({
+                        method: "fetchResponse",
+                        error: err,
+                        url: e.data.url
+                    }, "*")
+                }
+            }
+        });
+    </script>
+</body>
